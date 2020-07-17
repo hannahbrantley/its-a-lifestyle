@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import HomePage from '../HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import userService from '../../utils/userService';
@@ -32,7 +33,10 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={() =>
             userService.getUser() ?
-            <div>You are logged in</div>
+            <HomePage 
+              user={this.state.user}
+              handleLogout={this.handleLogout}
+            />
             :
             <Redirect to='/login' />
           }/>
