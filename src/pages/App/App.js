@@ -5,6 +5,8 @@ import HomePage from '../HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import AddCompetitionPage from '../AddCompetitionPage/AddCompetitionPage';
+import EditCompetitionPage from '../EditCompetitionPage/EditCompetitionPage';
+import CompetitionDetailPage from '../CompetitionDetailPage/CompetitionDetailPage'
 import userService from '../../utils/userService';
 import * as competitionService from '../../utils/competitionsService';
 
@@ -38,6 +40,19 @@ class App extends Component {
     this.setState(state => ({
       competitions: state.competitions.filter(c => c._id !== id)
     }), () => this.props.history.push('/'));
+  }
+
+  handleUpdateCompetition = async updatedCompetitionData => {
+    const updatedCompetition = await competitionService.update(updatedCompetitionData);
+    // Using map to replace just the puppy that was updated
+    const newCompetitionArray = this.state.competitions.map(c => 
+      c._id === updatedCompetition._ic ? updatedCompetition : c
+    );
+    this.setState(
+      {competitions: newCompetitionArray},
+      // This cb function runs after state is updated
+      () => this.props.history.push('/')
+    );
   }
 
   /*--- Lifecycle Methods ---*/
@@ -85,6 +100,15 @@ class App extends Component {
             :
             <Redirect to='/login' />
           }/>
+          <Route exact path='/details' render={({location}) => 
+            <CompetitionDetailPage location={location}/>
+          } />
+          <Route exact path='/edit' render={({location}) => 
+            <EditCompetitionPage
+              handleUpdateCompetition={this.handleUpdateCompetition}
+              location={location}
+            />
+          } />
         </Switch>
       </div>
     );

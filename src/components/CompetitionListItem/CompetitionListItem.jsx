@@ -19,15 +19,6 @@ function CompetitionListItem({competition, handleDeleteCompetition}) {
           >
             DETAILS
           </Link>
-          <Link
-            className='btn btn-xs btn-warning'
-            to={{
-              pathname: '/edit',
-              state: {competition}
-            }}
-          >
-            EDIT
-          </Link>
           <button
             className='btn btn-xs btn-danger margin-left-10'
             onClick={() => handleDeleteCompetition(competition._id)}
