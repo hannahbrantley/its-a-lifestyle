@@ -5,9 +5,11 @@ import './NavBar.css';
 const NavBar = (props) => {
   let nav = props.user ?
     <div>
-      <Link to='/' onClick={props.handleLogout} className='NavBar-link'>LOG OUT</Link>
+      <Link to='' onClick={props.handleLogout} className='NavBar-link'>LOG OUT</Link>
       &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
       <span className='NavBar-welcome'>WELCOME, {props.user.name}</span>
+      &nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+      <Link to='/add' className='NavBar-link'>New Competition</Link>
     </div>
     :
     <div>
@@ -18,7 +20,9 @@ const NavBar = (props) => {
 
   return (
     <div className='NavBar'>
+      <nav id='menu'>
       {nav}
+      </nav>
     </div>
   );
 };
