@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './CompetitionListItem.css';
 
-function CompetitionListItem({competition, handleDeleteCompetition}) { 
+function CompetitionListItem({competition, handleDeleteCompetition, user}) { 
     return (
       <div className='panel panel-default'>
         <div className="panel-heading">
-          <h3 className='panel-title'>{competition.name}</h3>
+        <h3 className='panel-title'>{competition.name}, {user._id}</h3>
         </div>
         <div className='body'>{competition.startDate}</div>
         <div className='panel-footer CompetitionListItem-action-panel'>

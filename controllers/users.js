@@ -15,6 +15,7 @@ async function login(req, res) {
     user.comparePassword(req.body.pw, (err, isMatch) => {
       if (isMatch) {
         const token = createJWT(user);
+        console.log('token:', token);
         res.json({token});
       } else {
         return res.status(400).json({err: 'bad credentials'});
@@ -29,11 +30,10 @@ async function signup(req, res) {
   const user = new User(req.body);
   try {
     await user.save();
-    // TODO: Send back a JWT instead of the user
     const token = createJWT(user);
+    console.log('token in signup controller:', token);
     res.json({ token });
   } catch (err) {
-    // Probably a duplicate email
     res.status(400).json(err);
   }
 }
@@ -41,9 +41,6 @@ async function signup(req, res) {
 /*---  Helper Functions ---*/
 
 function createJWT(user) {
-  return jwt.sign(
-    { user },  // data payload
-    SECRET,
-    { expiresIn: '24h' }
-  );
+  const token = jwt.sign({user}, SECRET, {expiresIn: '24h'});
+  return token;
 }

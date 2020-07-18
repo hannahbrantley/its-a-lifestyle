@@ -19,7 +19,11 @@ const competitionSchema = new Schema({
   },
   ante: Number, 
   penalty: Number,
-  daysPerWeek: Number
+  daysPerWeek: Number,
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 },{
   timestamps: true
 });

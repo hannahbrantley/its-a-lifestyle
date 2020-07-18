@@ -19,7 +19,10 @@ module.exports = {
   }
   
   async function create(req, res) {
+    console.log('req.user:', req.user)
+    req.body.owner = req.user._id;
     const competition = await Competition.create(req.body);
+    console.log('competition:', competition);
     res.status(201).json(competition);
   }
   
