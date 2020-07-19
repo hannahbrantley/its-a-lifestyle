@@ -5,8 +5,27 @@ const SECRET = process.env.SECRET;
 
 module.exports = {
   signup,
-  login
+  login,
+  index
 };
+
+async function index(req, res) {
+  const participants = await User.find({});
+  console.log('getting a list of users!!!')
+  res.status(200).json(participants);
+}
+
+async function signup(req, res) {
+  const user = new User(req.body);
+  try {
+    await user.save();
+    const token = createJWT(user);
+    console.log('token in signup controller:', token);
+    res.json({ token });
+  } catch (err) {
+    res.status(400).json(err);
+  }
+}
 
 async function login(req, res) {
   try {
@@ -26,17 +45,6 @@ async function login(req, res) {
   }
 }
 
-async function signup(req, res) {
-  const user = new User(req.body);
-  try {
-    await user.save();
-    const token = createJWT(user);
-    console.log('token in signup controller:', token);
-    res.json({ token });
-  } catch (err) {
-    res.status(400).json(err);
-  }
-}
 
 /*---  Helper Functions ---*/
 

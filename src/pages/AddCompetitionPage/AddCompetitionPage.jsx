@@ -9,7 +9,8 @@ class AddCompetitionPage extends Component {
           endDate: '',
           ante: '',
           penalty: '',
-          daysPerWeek: ''
+          daysPerWeek: '',
+          participants: ''
       }
     };
     formRef = React.createRef();
@@ -32,8 +33,8 @@ class AddCompetitionPage extends Component {
     render() {
       return (
         <>
-        <h1>Create New Competition</h1>
-        <h2>wassup</h2>
+        <h1>Create New Competition is this updating</h1>
+        <h2>hello</h2>
         <form ref={this.formRef} onSubmit={this.handleSubmit}>
             <div className="form-group">
                 <label>Name</label>
@@ -96,6 +97,13 @@ class AddCompetitionPage extends Component {
                     onChange={this.handleChange}
                     required
                 />
+            </div>
+            <div className="form-group">
+                <label>Participant {typeof(this.props.participants)}</label>
+                <select className="form-control" name="participants" value={this.state.formData.participants} onChange={this.handleChange}>
+                    <option>Choose a User</option>
+      {this.props.participants.map((participant, idx) => <option key={participant._id} value={participant._id}>{participant.name}{typeof(participant._id)}</option>)}
+                </select>
             </div>
             <button
                 type="submit"

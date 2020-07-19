@@ -37,9 +37,19 @@ function logout() {
   tokenService.removeToken();
 }
 
+function index() {
+  return fetch(BASE_URL, {
+    headers: {
+      'Authorization': `Bearer ${tokenService.getToken()}`
+    }
+  })
+  .then(res => res.json());
+}
+
 export default {
   signup,
   getUser,
   logout,
   login,
+  index
 };

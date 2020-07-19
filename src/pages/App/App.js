@@ -8,11 +8,12 @@ import AddCompetitionPage from '../AddCompetitionPage/AddCompetitionPage';
 import EditCompetitionPage from '../EditCompetitionPage/EditCompetitionPage';
 import CompetitionDetailPage from '../CompetitionDetailPage/CompetitionDetailPage'
 import userService from '../../utils/userService';
-import * as competitionService from '../../utils/competitionsService';
+import * as competitionsService from '../../utils/competitionsService';
 
 class App extends Component {
   state = {
     competitions: [],
+    participants: [],
     user: userService.getUser(),
   }
 
@@ -29,21 +30,21 @@ class App extends Component {
   }
 
   handleAddCompetition = async newCompetitionData => {
-    const newComp = await competitionService.create(newCompetitionData);
+    const newComp = await competitionsService.create(newCompetitionData);
     this.setState(state => ({
       competitions: [...state.competitions, newComp]
     }),
     () => this.props.history.push('/'));
   }
   handleDeleteCompetition= async id => {
-    await competitionService.deleteOne(id);
+    await competitionsService.deleteOne(id);
     this.setState(state => ({
       competitions: state.competitions.filter(c => c._id !== id)
     }), () => this.props.history.push('/'));
   }
 
   handleUpdateCompetition = async updatedCompetitionData => {
-    const updatedCompetition = await competitionService.update(updatedCompetitionData);
+    const updatedCompetition = await competitionsService.update(updatedCompetitionData);
     // Using map to replace just the puppy that was updated
     const newCompetitionArray = this.state.competitions.map(c => 
       c._id === updatedCompetition._ic ? updatedCompetition : c
@@ -54,11 +55,26 @@ class App extends Component {
       () => this.props.history.push('/')
     );
   }
+  getAllCompetitions = async () => {
+    const competitions = await competitionsService.getAll();
+    console.log('got all competitions fa real!')
+    this.setState({
+      competitions
+    }, () => this.props.history.push('/'));
+  }  
+  getAllParticipants = async () => {
+    const participants = await userService.index();
+    console.log('got all participants fa real!')
+    this.setState({
+      participants
+    }, () => this.props.history.push('/'));
+  }
 
   /*--- Lifecycle Methods ---*/
   async componentDidMount() {
-    const competitions = await competitionService.getAll();
-    this.setState({competitions});
+    this.getAllParticipants();
+    this.getAllCompetitions();
+    console.log('got all competitions')
   }
 
   render() {
@@ -72,6 +88,7 @@ class App extends Component {
               history={history}
               user={this.state.user}
               competitions={this.state.competitions}
+              participants={this.state.participants}
               handleLogout={this.handleLogout}
               handleDeleteCompetition={this.handleDeleteCompetition}
             />
@@ -94,6 +111,7 @@ class App extends Component {
             userService.getUser() ?
               <AddCompetitionPage
                 user={this.state.user}
+                participants={this.state.participants}
                 handleSignupOrLogin={this.handleSignupOrLogin}
                 handleAddCompetition={this.handleAddCompetition}
               />

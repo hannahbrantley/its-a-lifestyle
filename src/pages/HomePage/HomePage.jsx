@@ -14,7 +14,7 @@ const HomePage = (props) => {
         <div className="flex-h align-flex-end">
           <TestComponent />
         </div>
-        <div>This OKAY page</div>
+    <div>This OKAY page {typeof(props.participants)} 2</div>
         <div className='CompetitionListPage-grid'>
             {props.competitions.map(competition => 
               <CompetitionListItem
