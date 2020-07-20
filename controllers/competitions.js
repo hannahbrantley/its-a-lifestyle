@@ -36,4 +36,3 @@ module.exports = {
     const updatedCompetition = await Competition.findByIdAndUpdate(req.params.id, req.body, {new: true});
     res.status(200).json(updatedCompetition);
   }
-  

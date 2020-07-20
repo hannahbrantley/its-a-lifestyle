@@ -1,5 +1,5 @@
 import tokenService from './tokenService';
-const BASE_URL = '/api/competitions';
+const BASE_URL = '/api/workouts';
 
 export function getAll() {
     return fetch(BASE_URL, {
@@ -8,29 +8,28 @@ export function getAll() {
       }
     })
     .then(res => res.json());
-    // .then(res => res.text())
-    // .then(text => console.log(text));
   }
   
-export function create(competition) {
+export function create(workout) {
+    console.log('workoutService create func')
     return fetch(BASE_URL, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
         'Authorization': `Bearer ${tokenService.getToken()}`
       },
-      body: JSON.stringify(competition)
+      body: JSON.stringify(workout)
     }).then(res => res.json());
   }
   
-  export function update(competition) {
-    return fetch(`${BASE_URL}/${competition._id}`, {
+  export function update(workout) {
+    return fetch(`${BASE_URL}/${workout._id}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json',
         'Authorization': `Bearer ${tokenService.getToken()}`
       },
-      body: JSON.stringify(competition)
+      body: JSON.stringify(workout)
     }).then(res => res.json());
   }
   

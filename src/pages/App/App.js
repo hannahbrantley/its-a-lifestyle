@@ -5,15 +5,18 @@ import HomePage from '../HomePage/HomePage';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import AddCompetitionPage from '../AddCompetitionPage/AddCompetitionPage';
+import AddWorkoutPage from '../AddWorkoutPage/AddWorkoutPage';
 import EditCompetitionPage from '../EditCompetitionPage/EditCompetitionPage';
 import CompetitionDetailPage from '../CompetitionDetailPage/CompetitionDetailPage'
 import userService from '../../utils/userService';
 import * as competitionsService from '../../utils/competitionsService';
+import * as workoutService from '../../utils/workoutService';
 
 class App extends Component {
   state = {
     competitions: [],
     participants: [],
+    workouts: [],
     user: userService.getUser(),
   }
 
@@ -26,7 +29,9 @@ class App extends Component {
   };
 
   handleSignupOrLogin = () => {
-    this.setState({user: userService.getUser()});
+    this.setState({
+      user: userService.getUser()
+    });
   }
 
   handleAddCompetition = async newCompetitionData => {
@@ -57,24 +62,29 @@ class App extends Component {
   }
   getAllCompetitions = async () => {
     const competitions = await competitionsService.getAll();
-    console.log('got all competitions fa real!')
     this.setState({
       competitions
     }, () => this.props.history.push('/'));
   }  
   getAllParticipants = async () => {
     const participants = await userService.index();
-    console.log('got all participants fa real!')
     this.setState({
       participants
     }, () => this.props.history.push('/'));
+  }
+  handleAddWorkout = async newWorkoutData => {
+    const newWorkout = await workoutService.create(newWorkoutData);
+    console.log('handleAddWorkout happening');
+    this.setState(state => ({
+      workouts: [...state.workouts, newWorkout]
+    }),
+    () => this.props.history.push('/'));
   }
 
   /*--- Lifecycle Methods ---*/
   async componentDidMount() {
     this.getAllParticipants();
     this.getAllCompetitions();
-    console.log('got all competitions')
   }
 
   render() {
@@ -82,30 +92,30 @@ class App extends Component {
       <div>
         <header className='header-footer'>It's a Lifestyle</header>
         <Switch>
-          <Route exact path='/' render={({ history }) =>
-            userService.getUser() ?
-            <HomePage 
-              history={history}
-              user={this.state.user}
-              competitions={this.state.competitions}
-              participants={this.state.participants}
-              handleLogout={this.handleLogout}
-              handleDeleteCompetition={this.handleDeleteCompetition}
+          <Route exact path='/login' render={({ history }) => 
+            <LoginPage
+            handleSignupOrLogin={this.handleSignupOrLogin}
+            history={history}
             />
-            :
-            <Redirect to='/login' />
           }/>
           <Route exact path='/signup' render={({ history }) => 
             <SignupPage
               history={history}
               handleSignupOrLogin={this.handleSignupOrLogin}
-              />
-          }/>
-          <Route exact path='/login' render={({ history }) => 
-            <LoginPage
-              handleSignupOrLogin={this.handleSignupOrLogin}
-              history={history}
             />
+          }/>
+          <Route exact path='/' render={({ history }) =>
+            userService.getUser() ?
+            <HomePage 
+            history={history}
+            user={this.state.user}
+            competitions={this.state.competitions}
+            participants={this.state.participants}
+            handleLogout={this.handleLogout}
+            handleDeleteCompetition={this.handleDeleteCompetition}
+            />
+            :
+            <Redirect to='/login' />
           }/>
           <Route exact path='/add' render={() => 
             userService.getUser() ?
@@ -127,6 +137,16 @@ class App extends Component {
               location={location}
             />
           } />
+          <Route exact path='/addWorkout' render={() => 
+            userService.getUser() ?
+              <AddWorkoutPage
+                user={this.state.user}
+                handleSignupOrLogin={this.handleSignupOrLogin}
+                handleAddWorkout={this.handleAddWorkout}
+              />
+            :
+            <Redirect to='/login' />
+          }/>
         </Switch>
       </div>
     );

@@ -3,12 +3,11 @@ const router = express.Router();
 const usersCtrl = require('../../controllers/users');
 
 /*---------- Public Routes ----------*/
-router.get('/', usersCtrl.index);
 router.post('/signup', usersCtrl.signup);
 router.post('/login', usersCtrl.login);
+// router.get('/index', usersCtrl.index);
 
 
 /*---------- Protected Routes ----------*/
-
 
 module.exports = router;

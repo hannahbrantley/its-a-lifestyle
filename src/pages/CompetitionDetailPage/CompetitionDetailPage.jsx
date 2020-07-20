@@ -2,7 +2,7 @@ import React from 'react';
 import CompetitionCard from '../../components/CompetitionCard/CompetitionCard';
 
 function CompetitionDetailPage(props) {
-  // Refer to PuppyListItem to see how puppy is being passed via the <Link>
+
   const competition = props.location.state.competition;
   return (
     <>

@@ -16,12 +16,14 @@ function login(creds) {
 }
 
 function signup(user) {
+  console.log(user);
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(user)
   })
   .then(res => {
+    console.log(res);
     if (res.ok) return res.json();
     // Probably a duplicate email
     throw new Error('Email already taken!');
@@ -29,23 +31,24 @@ function signup(user) {
   .then(({ token }) => tokenService.setToken(token));
 }
 
+
 function getUser() {
   return tokenService.getUserFromToken();
 }
 
 function logout() {
+  console.log('userService removing token');
   tokenService.removeToken();
 }
 
 function index() {
-  return fetch(BASE_URL, {
+  return fetch(BASE_URL + 'index', {
     headers: {
       'Authorization': `Bearer ${tokenService.getToken()}`
     }
   })
   .then(res => res.json());
 }
-
 export default {
   signup,
   getUser,

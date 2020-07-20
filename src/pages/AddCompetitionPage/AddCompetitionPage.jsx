@@ -10,20 +10,28 @@ class AddCompetitionPage extends Component {
           ante: '',
           penalty: '',
           daysPerWeek: '',
-          participants: ''
-      }
+          participants: []
+      },
     };
     formRef = React.createRef();
+    handleCheck = e => {
+        const participants = this.state.formData.participants;
+        if (participants.includes(e.target.value)) {
+            const idx = participants.indexOf(e.target.value)
+            participants.splice(idx, 1)
+        }
+        this.state.formData.participants.push(e.target.value);
+    }
     handleChange = e => {
-      const formData = {
-          ...this.state.formData, 
-          [e.target.name]: e.target.value
-      };
-
-      this.setState({
-        formData,
-        invalidForm: !this.formRef.current.checkValidity()
-      });
+        const formData = {
+            ...this.state.formData, 
+            [e.target.name]: e.target.value
+        };
+  
+        this.setState({
+          formData,
+          invalidForm: !this.formRef.current.checkValidity()
+        });
     };
     handleSubmit = e => {
         e.preventDefault();
@@ -33,7 +41,7 @@ class AddCompetitionPage extends Component {
     render() {
       return (
         <>
-        <h1>Create New Competition is this updating</h1>
+        <h1>Create New Competitio new</h1>
         <h2>hello</h2>
         <form ref={this.formRef} onSubmit={this.handleSubmit}>
             <div className="form-group">
@@ -99,11 +107,20 @@ class AddCompetitionPage extends Component {
                 />
             </div>
             <div className="form-group">
-                <label>Participant {typeof(this.props.participants)}</label>
-                <select className="form-control" name="participants" value={this.state.formData.participants} onChange={this.handleChange}>
-                    <option>Choose a User</option>
-      {this.props.participants.map((participant, idx) => <option key={participant._id} value={participant._id}>{participant.name}{typeof(participant._id)}</option>)}
-                </select>
+                <label>Participants</label>
+                {this.props.participants.map((participant, idx) => 
+                    <div className={participant.name} key={participant._id}>
+                        <input
+                            type="checkbox"
+                            className="form-control"
+                            name="participants"
+                            key={participant._id} 
+                            value={participant._id}
+                            onChange={this.handleCheck}
+                            />
+                        <label>{participant.name}</label>
+                    </div>
+                )}
             </div>
             <button
                 type="submit"

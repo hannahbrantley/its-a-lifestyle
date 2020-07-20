@@ -3,11 +3,7 @@ import SignupForm from '../../components/SignupForm/SignupForm';
 import './SignupPage.css';
 
 class SignupPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {message: ''}
-  }
-
+  state = {message: ''}
   updateMessage = (msg) => {
     this.setState({message: msg});
   }

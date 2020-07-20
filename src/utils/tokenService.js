@@ -5,16 +5,17 @@ export default {
     getUserFromToken,
   };
   
-  function getUserFromToken() {
-    const token = getToken();
-    return token ? JSON.parse(atob(token.split('.')[1])).user : null;
-  }
-  
-  function removeToken() {
-    localStorage.removeItem('token');
+  function setToken(token) {
+    // token is a string
+    if (token) {
+      localStorage.setItem('token', token);
+    } else {
+      localStorage.removeItem('token');
+    }
   }
   
   function getToken() {
+    console.log('tokenservice getting token');
     let token = localStorage.getItem('token');
     if (token) {
       // Check if expired, remove if it is
@@ -24,15 +25,18 @@ export default {
         localStorage.removeItem('token');
         token = null;
       }
-    }
+    } 
+    console.log('token:', token);
     return token;
   }
-  
-  function setToken(token) {
-    // token is a string
-    if (token) {
-      localStorage.setItem('token', token);
-    } else {
-      localStorage.removeItem('token');
-    }
+
+  function getUserFromToken() {
+    const token = getToken();
+    return token ? JSON.parse(atob(token.split('.')[1])).user : null;
   }
+  
+  function removeToken() {
+    localStorage.removeItem('token');
+  }
+  
+  
