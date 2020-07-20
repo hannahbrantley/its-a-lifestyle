@@ -46,6 +46,7 @@ class AddWorkoutPage extends Component {
             <div className="form-group">
                 <label>Duration</label>
                 <input
+                    type="text"
                     className="form-control"
                     name="duration"
                     value={this.state.formData.duration}
@@ -56,6 +57,7 @@ class AddWorkoutPage extends Component {
             <div className="form-group">
                 <label>Activity</label>
                 <input
+                    type="text"
                     className="form-control"
                     name="activity"
                     value={this.state.formData.activity}

@@ -2,6 +2,7 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/workouts';
 
 export function getAll() {
+    console.log('getAll workouts from workoutService')
     return fetch(BASE_URL, {
       headers: {
         'Authorization': `Bearer ${tokenService.getToken()}`

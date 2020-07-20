@@ -6,6 +6,7 @@ import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
 import AddCompetitionPage from '../AddCompetitionPage/AddCompetitionPage';
 import AddWorkoutPage from '../AddWorkoutPage/AddWorkoutPage';
+import ProfilePage from '../ProfilePage/ProgilePage';
 import EditCompetitionPage from '../EditCompetitionPage/EditCompetitionPage';
 import CompetitionDetailPage from '../CompetitionDetailPage/CompetitionDetailPage'
 import userService from '../../utils/userService';
@@ -48,41 +49,56 @@ class App extends Component {
     }), () => this.props.history.push('/'));
   }
 
+  
   handleUpdateCompetition = async updatedCompetitionData => {
     const updatedCompetition = await competitionsService.update(updatedCompetitionData);
     // Using map to replace just the puppy that was updated
     const newCompetitionArray = this.state.competitions.map(c => 
       c._id === updatedCompetition._ic ? updatedCompetition : c
-    );
-    this.setState(
-      {competitions: newCompetitionArray},
-      // This cb function runs after state is updated
-      () => this.props.history.push('/')
-    );
-  }
-  getAllCompetitions = async () => {
-    const competitions = await competitionsService.getAll();
+      );
+      this.setState(
+        {competitions: newCompetitionArray},
+        // This cb function runs after state is updated
+        () => this.props.history.push('/')
+        );
+      }
+      getAllCompetitions = async () => {
+        const competitions = await competitionsService.getAll();
+        this.setState({
+          competitions
+        }, () => this.props.history.push('/'));
+      }  
+      getAllParticipants = async () => {
+        const participants = await userService.index();
+        this.setState({
+          participants
+        }, () => this.props.history.push('/'));
+      }
+      handleAddWorkout = async newWorkoutData => {
+        const newWorkout = await workoutService.create(newWorkoutData);
+        console.log('handleAddWorkout happening');
+        this.setState(state => ({
+          workouts: [...state.workouts, newWorkout]
+        }),
+        () => this.props.history.push('/profile'));
+      }
+      
+      handleDeleteWorkout= async id => {
+        await workoutService.deleteOne(id);
+        this.setState(state => ({
+          workouts: state.workouts.filter(w => w._id !== id)
+        }), () => this.props.history.push('/profile'));
+      }
+  getAllWorkouts = async () => {
+    const workouts = await workoutService.getAll();
     this.setState({
-      competitions
+      workouts
     }, () => this.props.history.push('/'));
-  }  
-  getAllParticipants = async () => {
-    const participants = await userService.index();
-    this.setState({
-      participants
-    }, () => this.props.history.push('/'));
-  }
-  handleAddWorkout = async newWorkoutData => {
-    const newWorkout = await workoutService.create(newWorkoutData);
-    console.log('handleAddWorkout happening');
-    this.setState(state => ({
-      workouts: [...state.workouts, newWorkout]
-    }),
-    () => this.props.history.push('/'));
   }
 
   /*--- Lifecycle Methods ---*/
   async componentDidMount() {
+    this.getAllWorkouts();
     this.getAllParticipants();
     this.getAllCompetitions();
   }
@@ -122,7 +138,6 @@ class App extends Component {
               <AddCompetitionPage
                 user={this.state.user}
                 participants={this.state.participants}
-                competitions={this.state.competitions}
                 handleSignupOrLogin={this.handleSignupOrLogin}
                 handleAddCompetition={this.handleAddCompetition}
               />
@@ -144,6 +159,18 @@ class App extends Component {
                 user={this.state.user}
                 handleSignupOrLogin={this.handleSignupOrLogin}
                 handleAddWorkout={this.handleAddWorkout}
+              />
+            :
+            <Redirect to='/login' />
+          }/>
+          <Route exact path='/profile' render={({ history }) => 
+            userService.getUser() ?
+              <ProfilePage
+                history={history}
+                user={this.state.user}
+                workouts={this.state.workouts}
+                handleSignupOrLogin={this.handleSignupOrLogin}
+                handleDeleteWorkout={this.handleDeleteWorkout}
               />
             :
             <Redirect to='/login' />

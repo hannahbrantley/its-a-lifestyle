@@ -9,6 +9,7 @@ module.exports = {
   
   async function index(req, res) {
     const workouts = await Workout.find({});
+    console.log('indexing workouts from workouts controller')
     res.status(200).json(workouts);
   }
   

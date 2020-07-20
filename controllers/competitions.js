@@ -10,7 +10,7 @@ module.exports = {
   
   async function index(req, res) {
     const competitions = await Competition.find({});
-    console.log('is this where it is happening?')
+    console.log('getting all competitions from index comp controller')
     res.status(200).json(competitions);
   }
   

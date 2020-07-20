@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 const usersRoutes = require('./routes/api/users');
 const competitionRoutes = require('./routes/api/competitions');
+const workoutRoutes = require('./routes/api/workouts');
 
 
 // Put API routes here, before the "catch all" route
@@ -22,6 +23,7 @@ app.use('/api/users', usersRoutes);
 
 app.use(require('./config/auth'));
 app.use('/api/competitions', competitionRoutes);
+app.use('/api/workouts', workoutRoutes);
 
 // The following "catch all" route (note the *)is necessary
 // for a SPA's client-side routing to properly work 

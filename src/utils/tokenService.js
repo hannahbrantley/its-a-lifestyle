@@ -15,7 +15,6 @@ export default {
   }
   
   function getToken() {
-    console.log('tokenservice getting token');
     let token = localStorage.getItem('token');
     if (token) {
       // Check if expired, remove if it is
@@ -26,7 +25,6 @@ export default {
         token = null;
       }
     } 
-    console.log('token:', token);
     return token;
   }
 
