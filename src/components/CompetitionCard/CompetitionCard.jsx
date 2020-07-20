@@ -14,7 +14,7 @@ function CompetitionCard({competition}) {
           <dt>Ante</dt>
           <dd>{competition.ante}</dd>
           <dt>Participants</dt>
-          <dd>let's see here</dd>
+          
         </dl>
       </div>
       <div className='panel-footer'>

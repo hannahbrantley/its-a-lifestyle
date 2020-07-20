@@ -122,6 +122,7 @@ class App extends Component {
               <AddCompetitionPage
                 user={this.state.user}
                 participants={this.state.participants}
+                competitions={this.state.competitions}
                 handleSignupOrLogin={this.handleSignupOrLogin}
                 handleAddCompetition={this.handleAddCompetition}
               />
