@@ -42,7 +42,12 @@ class App extends Component {
     }),
     () => this.props.history.push('/'));
   }
-  handleDeleteCompetition= async id => {
+
+  handleShowCompetition = id => {
+    competitionsService.showOne(id);
+  }
+
+  handleDeleteCompetition = async id => {
     await competitionsService.deleteOne(id);
     this.setState(state => ({
       competitions: state.competitions.filter(c => c._id !== id)
@@ -60,42 +65,40 @@ class App extends Component {
         {competitions: newCompetitionArray},
         // This cb function runs after state is updated
         () => this.props.history.push('/')
-        );
-      }
-      getAllCompetitions = async () => {
-        const competitions = await competitionsService.getAll();
-        this.setState({
-          competitions
-        }, () => this.props.history.push('/'));
-      }  
-      getAllParticipants = async () => {
-        const participants = await userService.index();
-        this.setState({
-          participants
-        }, () => this.props.history.push('/'));
-      }
-      handleAddWorkout = async newWorkoutData => {
-        const newWorkout = await workoutService.create(newWorkoutData);
-        console.log('handleAddWorkout happening');
-        this.setState(state => ({
-          workouts: [...state.workouts, newWorkout]
-        }),
-        () => this.props.history.push('/profile'));
-      }
-      
-      handleDeleteWorkout= async id => {
-        await workoutService.deleteOne(id);
-        this.setState(state => ({
-          workouts: state.workouts.filter(w => w._id !== id)
-        }), () => this.props.history.push('/profile'));
-      }
+    );
+  }
+  getAllCompetitions = async () => {
+    const competitions = await competitionsService.getAll();
+    this.setState({
+      competitions
+    }, () => this.props.history.push('/'));
+  }  
+  getAllParticipants = async () => {
+    const participants = await userService.index();
+    this.setState({
+      participants
+    }, () => this.props.history.push('/'));
+  }
+  handleAddWorkout = async newWorkoutData => {
+    const newWorkout = await workoutService.create(newWorkoutData);
+    this.setState(state => ({
+      workouts: [...state.workouts, newWorkout]
+    }),
+    () => this.props.history.push('/profile'));
+  }
+  
+  handleDeleteWorkout= async id => {
+    await workoutService.deleteOne(id);
+    this.setState(state => ({
+      workouts: state.workouts.filter(w => w._id !== id)
+    }), () => this.props.history.push('/profile'));
+  }
   getAllWorkouts = async () => {
     const workouts = await workoutService.getAll();
     this.setState({
       workouts
     }, () => this.props.history.push('/'));
   }
-
   /*--- Lifecycle Methods ---*/
   async componentDidMount() {
     this.getAllWorkouts();
@@ -145,7 +148,10 @@ class App extends Component {
             <Redirect to='/login' />
           }/>
           <Route exact path='/details' render={({location}) => 
-            <CompetitionDetailPage location={location}/>
+            <CompetitionDetailPage 
+            location={location}
+            handleShowCompetition={this.handleShowCompetition}
+            />
           } />
           <Route exact path='/edit' render={({location}) => 
             <EditCompetitionPage

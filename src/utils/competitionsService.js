@@ -8,8 +8,6 @@ export function getAll() {
       }
     })
     .then(res => res.json());
-    // .then(res => res.text())
-    // .then(text => console.log(text));
   }
   
 export function create(competition) {
@@ -37,6 +35,14 @@ export function create(competition) {
   export function deleteOne(id) {
     return fetch(`${BASE_URL}/${id}`, {
       method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${tokenService.getToken()}`
+      }
+    }).then(res => res.json());
+  }
+
+  export function showOne(id) {
+    return fetch(`${BASE_URL}/${id}`, {
       headers: {
         'Authorization': `Bearer ${tokenService.getToken()}`
       }

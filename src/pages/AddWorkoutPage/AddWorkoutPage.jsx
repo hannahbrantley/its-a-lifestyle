@@ -23,7 +23,6 @@ class AddWorkoutPage extends Component {
     };
     handleSubmit = e => {
         e.preventDefault();
-        console.log('submitting workout')
         this.props.handleAddWorkout(this.state.formData);
     };
   

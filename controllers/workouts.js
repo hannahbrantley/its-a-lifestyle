@@ -9,15 +9,12 @@ module.exports = {
   
   async function index(req, res) {
     const workouts = await Workout.find({});
-    console.log('indexing workouts from workouts controller')
     res.status(200).json(workouts);
   }
   
   async function create(req, res) {
-    console.log('req.user:', req.user)
     req.body.user = req.user._id;
     const workout = await Workout.create(req.body);
-    console.log('workout:', workout);
     res.status(201).json(workout);
   }
   

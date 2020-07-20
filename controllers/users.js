@@ -11,7 +11,6 @@ module.exports = {
 
 async function index(req, res) {
   const participants = await User.find({});
-  console.log('getting a list of users!!!')
   res.status(200).json(participants);
 }
 
@@ -20,7 +19,6 @@ async function signup(req, res) {
   try {
     await user.save();
     const token = createJWT(user);
-    console.log('token in signup controller:', token);
     res.json({ token });
   } catch (err) {
     res.status(400).json(err);
@@ -34,7 +32,6 @@ async function login(req, res) {
     user.comparePassword(req.body.pw, (err, isMatch) => {
       if (isMatch) {
         const token = createJWT(user);
-        console.log('token:', token);
         res.json({token});
       } else {
         return res.status(400).json({err: 'bad credentials'});

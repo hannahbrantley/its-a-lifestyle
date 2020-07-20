@@ -1,4 +1,5 @@
 const Competition = require('../models/competition');
+const User = require('../models/user');
 
 module.exports = {
     index,
@@ -10,20 +11,34 @@ module.exports = {
   
   async function index(req, res) {
     const competitions = await Competition.find({});
-    console.log('getting all competitions from index comp controller')
     res.status(200).json(competitions);
   }
   
-  async function show(req, res) {
-    const competition = await Competition.findById(req.params.id);
-    res.status(200).json(competition);
+  function show(id) {
+    const competition = Competition.findById(id);
+    const participants = competition.participants
+    Competition.
+    findOne({ _id: id }).
+    populate('participants').
+    exec(function (err, competition) {
+      if (err) return console.log('we got a frickin error');
+      console.log('The participants are ', competition.participants) 
+    });
+    console.log(participants);
+    console.log('are we getting down here');
   }
   
   async function create(req, res) {
-    console.log('req.user:', req.user)
-    req.body.owner = req.user._id;
+    req.body.owner = req.user;
+    const type = typeof(req.body.participants[0])
+    console.log(type);
+
+    thisParticipant = await User.findById(req.body.participants[0]).exec()
+    console.log('thisParticipant:', thisParticipant);
+
+    console.log(typeof(req.body.owner))
+    console.log('participants: ', req.body.participants[1], type);
     const competition = await Competition.create(req.body);
-    console.log('competition:', competition);
     res.status(201).json(competition);
   }
   

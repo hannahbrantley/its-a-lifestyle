@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import ParticipantStatusCard from '../ParticipantStatusCard/ParticipantStatusCard';
 
 function CompetitionCard({competition}) { 
   return (
@@ -14,7 +15,15 @@ function CompetitionCard({competition}) {
           <dt>Ante</dt>
           <dd>{competition.ante}</dd>
           <dt>Participants</dt>
-          
+          <div className='CompetitionListPage-grid'>
+            {competition.participants.map(participant => 
+              <ParticipantStatusCard
+                competition={competition}
+                participant={participant}
+                key={participant}
+              />
+            )}
+        </div>
         </dl>
       </div>
       <div className='panel-footer'>

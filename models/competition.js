@@ -20,7 +20,10 @@ const competitionSchema = new Schema({
   ante: Number, 
   penalty: Number,
   daysPerWeek: Number,
-  participants: [],
+  participants: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }],
   owner: {
     type: Schema.Types.ObjectId,
     ref: 'User'
