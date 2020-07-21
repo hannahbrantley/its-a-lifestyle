@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import ParticipantStatusCard from '../ParticipantStatusCard/ParticipantStatusCard';
 
 function CompetitionCard({competition, participants}) { 
-  console.log('participants on competition card component: ', participants)
   return (
     <div className='panel panel-default'>
       <div className="panel-heading">
@@ -11,10 +10,6 @@ function CompetitionCard({competition, participants}) {
       </div>
       <div className='panel-body'>
         <dl>
-          {/* <dt>Dates</dt>
-          <dd>{competition.startDate}-{competition.endDate}</dd>
-          <dt>Ante</dt>
-          <dd>{competition.ante}</dd> */}
           <dt>Participants</dt>
           <div className='CompetitionListPage-grid'>
             {participants.map(participant => 

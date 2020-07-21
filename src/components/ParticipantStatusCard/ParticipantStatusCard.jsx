@@ -1,10 +1,6 @@
 import React from 'react';
 
 function ParticipantStatusCard({competition, participant}) { 
-    console.log(participant)
-    console.log(competition)
-  console.log('participant card type: ', typeof(participant))
-  console.log('competition card type: ', typeof(competition))
   return (
     <div className='panel panel-default'>
       <div className="panel-heading">
