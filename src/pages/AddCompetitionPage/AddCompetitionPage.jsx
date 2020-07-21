@@ -15,14 +15,16 @@ class AddCompetitionPage extends Component {
     };
     formRef = React.createRef();
     handleCheck = e => {
-        const participants = this.state.formData.participants;
+      const participants = this.state.formData.participants
         if (participants.includes(e.target.value)) {
             const idx = participants.indexOf(e.target.value)
             participants.splice(idx, 1)
+        } else {
+            this.state.formData.participants.push(e.target.value);
         }
-        this.state.formData.participants.push(e.target.value);
     }
     handleChange = e => {
+        console.log('handlechange')
         const formData = {
             ...this.state.formData, 
             [e.target.name]: e.target.value
@@ -108,7 +110,7 @@ class AddCompetitionPage extends Component {
             </div>
             <div className="form-group">
                 <label>Participants</label>
-                {this.props.participants.map((participant, idx) => 
+                {this.props.participants.map((participant) => 
                     <div className={participant.name} key={participant._id}>
                         <input
                             type="checkbox"
