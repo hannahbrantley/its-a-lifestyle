@@ -7,8 +7,6 @@ const CompetitionDetailPage = (props) => {
   const participants = props.location.state.participants
   const workouts = props.location.state.workouts
 
-  console.log('comp detail page workouts', workouts, typeof(workouts))
-
   
   const participantArray = competition.participants.map(participant => 
     participants.filter(p => {return p._id === participant})[0]
