@@ -15,7 +15,6 @@ const ProfilePage = (props) => {
           <TestComponent />
         </div>
         <div>PROFILE</div>
-        <div>{console.log(props.workouts)}</div>
         <div className='WorkoutListPage-grid'>
             {props.workouts.map(workout => 
               <WorkoutListItem

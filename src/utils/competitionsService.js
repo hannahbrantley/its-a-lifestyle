@@ -41,10 +41,10 @@ export function create(competition) {
     }).then(res => res.json());
   }
 
-  export function showOne(id) {
-    return fetch(`${BASE_URL}/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${tokenService.getToken()}`
-      }
-    }).then(res => res.json());
-  }
+  // export function showOne(id) {
+  //   return fetch(`${BASE_URL}/${id}`, {
+  //     headers: {
+  //       'Authorization': `Bearer ${tokenService.getToken()}`
+  //     }
+  //   }).then(res => res.json());
+  // }

@@ -18,6 +18,7 @@ const HomePage = (props) => {
         <div className='CompetitionListPage-grid'>
             {props.competitions.map(competition => 
               <CompetitionListItem
+                participants={props.participants}
                 user={props.user}
                 competition={competition}
                 handleDeleteCompetition={props.handleDeleteCompetition}

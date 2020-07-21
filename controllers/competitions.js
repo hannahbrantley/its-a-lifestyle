@@ -3,7 +3,6 @@ const User = require('../models/user');
 
 module.exports = {
     index,
-    show,
     create,
     delete: deleteOne,
     update
@@ -14,20 +13,24 @@ module.exports = {
     res.status(200).json(competitions);
   }
   
-  function show(id) {
-    const competition = Competition.findById(id);
-    const participants = competition.participants
-    Competition.
-    findOne({ _id: id }).
-    populate('participants').
-    exec(function (err, competition) {
-      if (err) return console.log('we got a frickin error');
-      console.log('The participants are ', competition.participants) 
-    });
-    console.log(participants);
-    console.log('are we getting down here');
-  }
-  
+  // async function show(id) {
+  //   const competition = await Competition.findById(id).exec();
+  //   console.log(competition)
+  //   // const participants = competition.participants.map(participant => 
+  //   //     User.findById(participant)
+  //   //   );
+
+  //   // Competition.
+  //   // findOne({ _id: id }).
+  //   // populate('participants').
+  //   // exec(function (err, competition) {
+  //   //   if (err) return console.log('we got a frickin error');
+  //   //   console.log('The participants are ', competition.participants) 
+  //   // });
+
+  //   console.log('are we getting down here');
+  // }
+
   async function create(req, res) {
     req.body.owner = req.user;
     const type = typeof(req.body.participants[0])

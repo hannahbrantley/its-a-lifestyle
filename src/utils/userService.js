@@ -16,7 +16,6 @@ function login(creds) {
 }
 
 function signup(user) {
-  console.log(user);
   return fetch(BASE_URL + 'signup', {
     method: 'POST',
     headers: new Headers({'Content-Type': 'application/json'}),
@@ -37,7 +36,6 @@ function getUser() {
 }
 
 function logout() {
-  console.log('userService removing token');
   tokenService.removeToken();
 }
 

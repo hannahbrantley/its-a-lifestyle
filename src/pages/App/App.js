@@ -43,10 +43,6 @@ class App extends Component {
     () => this.props.history.push('/'));
   }
 
-  handleShowCompetition = id => {
-    competitionsService.showOne(id);
-  }
-
   handleDeleteCompetition = async id => {
     await competitionsService.deleteOne(id);
     this.setState(state => ({
@@ -150,7 +146,7 @@ class App extends Component {
           <Route exact path='/details' render={({location}) => 
             <CompetitionDetailPage 
             location={location}
-            handleShowCompetition={this.handleShowCompetition}
+            participants={this.state.participants}
             />
           } />
           <Route exact path='/edit' render={({location}) => 
