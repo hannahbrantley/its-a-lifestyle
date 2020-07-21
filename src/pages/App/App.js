@@ -126,6 +126,7 @@ class App extends Component {
             user={this.state.user}
             competitions={this.state.competitions}
             participants={this.state.participants}
+            workouts={this.state.workouts}
             handleLogout={this.handleLogout}
             handleDeleteCompetition={this.handleDeleteCompetition}
             />
@@ -147,6 +148,7 @@ class App extends Component {
             <CompetitionDetailPage 
             location={location}
             participants={this.state.participants}
+            workouts={this.state.workouts}
             />
           } />
           <Route exact path='/edit' render={({location}) => 

@@ -19,6 +19,7 @@ const HomePage = (props) => {
             {props.competitions.map(competition => 
               <CompetitionListItem
                 participants={props.participants}
+                workouts={props.workouts}
                 user={props.user}
                 competition={competition}
                 handleDeleteCompetition={props.handleDeleteCompetition}

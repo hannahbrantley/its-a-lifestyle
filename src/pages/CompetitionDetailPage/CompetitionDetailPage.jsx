@@ -5,6 +5,9 @@ const CompetitionDetailPage = (props) => {
 
   const competition = props.location.state.clickedOnCompetition
   const participants = props.location.state.participants
+  const workouts = props.location.state.workouts
+
+  console.log('comp detail page workouts', workouts, typeof(workouts))
 
   
   const participantArray = competition.participants.map(participant => 
@@ -17,6 +20,7 @@ const CompetitionDetailPage = (props) => {
         <CompetitionCard
           key={competition._id}
           competition={competition}
+          workouts={workouts}
           participants={participantArray}
         />
       </>

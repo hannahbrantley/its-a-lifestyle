@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './CompetitionListItem.css';
 
-function CompetitionListItem({competition, handleDeleteCompetition, user, participants}) { 
+function CompetitionListItem({competition, handleDeleteCompetition, user, participants, workouts}) { 
     return (
       <div className='panel panel-default'>
         <div className="panel-heading">
@@ -15,7 +15,7 @@ function CompetitionListItem({competition, handleDeleteCompetition, user, partic
             className='btn btn-xs btn-info'
             to={{
               pathname: '/details',
-              state: {clickedOnCompetition: competition, participants: participants}
+              state: {clickedOnCompetition: competition, participants: participants, workouts: workouts}
             }}
           >
             DETAILS
