@@ -108,18 +108,6 @@ class App extends Component {
       <div>
         <header className='header-footer'>It's a Lifestyle</header>
         <Switch>
-          <Route exact path='/login' render={({ history }) => 
-            <LoginPage
-            handleSignupOrLogin={this.handleSignupOrLogin}
-            history={history}
-            />
-          }/>
-          <Route exact path='/signup' render={({ history }) => 
-            <SignupPage
-              history={history}
-              handleSignupOrLogin={this.handleSignupOrLogin}
-            />
-          }/>
           <Route exact path='/' render={({ history }) =>
             userService.getUser() ?
             <HomePage 
@@ -133,6 +121,18 @@ class App extends Component {
             />
             :
             <Redirect to='/login' />
+          }/>
+          <Route exact path='/login' render={({ history }) => 
+            <LoginPage
+            handleSignupOrLogin={this.handleSignupOrLogin}
+            history={history}
+            />
+          }/>
+          <Route exact path='/signup' render={({ history }) => 
+            <SignupPage
+              history={history}
+              handleSignupOrLogin={this.handleSignupOrLogin}
+            />
           }/>
           <Route exact path='/add' render={() => 
             userService.getUser() ?
