@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import './CompetitionListItem.css';
 
 function CompetitionListItem({competition, handleDeleteCompetition, user, participants, workouts}) { 
-  let theseParticipants = participants.filter(participant => competition.participants.includes(participant._id)) 
+  let theseParticipants = participants.filter(participant => competition.participants.includes(participant._id))
+  let comepetitionOwner = participants.filter(participant => participant._id === competition.owner) 
     return (
       <div className='panel panel-default'>
         <div className="panel-heading">
@@ -12,6 +13,7 @@ function CompetitionListItem({competition, handleDeleteCompetition, user, partic
         </div>
         <div className='body'>
           <dl>When: {moment(competition.startDate).format('MMMM Do YYYY')} to {moment(competition.endDate).format('MMMM Do YYYY')}</dl>
+          <dl>Organizer: {comepetitionOwner[0].name}</dl>
           <dl>Who: {theseParticipants.map(participant => <span>{participant.name}&nbsp;&nbsp;|&nbsp;&nbsp; </span>)}</dl>
           <dl>Challenge: Excercise {competition.daysPerWeek} times per week or pay ${competition.penalty}</dl>
         </div>
@@ -27,6 +29,7 @@ function CompetitionListItem({competition, handleDeleteCompetition, user, partic
           </Link>
           <button
             className='btn btn-xs btn-danger margin-left-10'
+            disabled={user._id !== competition.owner}
             onClick={() => handleDeleteCompetition(competition._id)}
           >
             DELETE

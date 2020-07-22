@@ -40,6 +40,10 @@ function CompetitionCard({participants, workouts, competition}) {
           <dl>{moment(competition.startDate).format('MMMM Do YYYY')} to {moment(competition.endDate).format('MMMM Do YYYY')}</dl>
         </dl>
         <dl>
+          <dt>Requirements</dt>
+  <dl>{competition.daysPerWeek} days per week</dl>
+        </dl>
+        <dl>
           <dt>Leaderboard</dt>
           <div className='CompetitionListPage-grid'>
             <table>
