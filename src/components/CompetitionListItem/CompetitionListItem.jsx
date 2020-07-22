@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import './CompetitionListItem.css';
 
 function CompetitionListItem({competition, handleDeleteCompetition, user, participants, workouts}) { 
+  let theseParticipants = participants.filter(participant => competition.participants.includes(participant._id)) 
     return (
       <div className='panel panel-default'>
         <div className="panel-heading">
@@ -11,7 +12,7 @@ function CompetitionListItem({competition, handleDeleteCompetition, user, partic
         </div>
         <div className='body'>
           <dl>When: {moment(competition.startDate).format('MMMM Do YYYY')} to {moment(competition.endDate).format('MMMM Do YYYY')}</dl>
-          <dl>Who: {participants.map(participant => <span>{participant.name}&nbsp;&nbsp;|&nbsp;&nbsp; </span>)}</dl>
+          <dl>Who: {theseParticipants.map(participant => <span>{participant.name}&nbsp;&nbsp;|&nbsp;&nbsp; </span>)}</dl>
           <dl>Challenge: Excercise {competition.daysPerWeek} times per week or pay ${competition.penalty}</dl>
         </div>
         <div className='panel-footer CompetitionListItem-action-panel'>

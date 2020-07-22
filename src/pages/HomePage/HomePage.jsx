@@ -4,6 +4,10 @@ import CompetitionListItem from '../../components/CompetitionListItem/Competitio
 import './HomePage.css';
 
 const HomePage = (props) => {
+  let myCompetitions = props.competitions.filter(competition =>
+    competition.participants.includes(props.user._id)
+   )
+
     return (
       <div className="HomePage">
         <NavBar
@@ -12,7 +16,7 @@ const HomePage = (props) => {
         />
         <div>
         <div className='CompetitionListPage-grid'>
-            {props.competitions.map(competition => 
+            {myCompetitions.map(competition => 
               <CompetitionListItem
                 participants={props.participants}
                 workouts={props.workouts}
