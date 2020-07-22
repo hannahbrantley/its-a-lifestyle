@@ -43,7 +43,6 @@ class AddCompetitionPage extends Component {
       return (
         <>
         <h1>Create New Competition</h1>
-        <h2>hello</h2>
         <form ref={this.formRef} onSubmit={this.handleSubmit}>
             <div className="form-group">
                 <label>Name</label>

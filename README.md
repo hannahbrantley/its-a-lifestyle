@@ -1,4 +1,4 @@
-# Day Planner
+# It's a Lifestyle
 
 ## Screenshots
 ![Home page](https://imgur.com/fPo8ftb.png)
