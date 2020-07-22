@@ -1,7 +1,6 @@
 import React from 'react';
 import NavBar from '../../components/NavBar/NavBar';
-import TestComponent from '../../components/TestComponent/TestComponent'
-import CompetitionListItem from '../../components/CompetitionListItem/CompetitionListItem'
+import CompetitionListItem from '../../components/CompetitionListItem/CompetitionListItem';
 import './HomePage.css';
 
 const HomePage = (props) => {
@@ -11,10 +10,7 @@ const HomePage = (props) => {
           user={props.user}
           handleLogout={props.handleLogout}
         />
-        <div className="flex-h align-flex-end">
-          <TestComponent />
-        </div>
-    <div>This OKAY page {typeof(props.participants)} 2</div>
+        <div>
         <div className='CompetitionListPage-grid'>
             {props.competitions.map(competition => 
               <CompetitionListItem
@@ -26,6 +22,7 @@ const HomePage = (props) => {
                 key={competition._id}
               />
             )}
+        </div>
         </div>
       </div>
     );

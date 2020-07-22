@@ -24,7 +24,6 @@ class AddCompetitionPage extends Component {
         }
     }
     handleChange = e => {
-        console.log('handlechange')
         const formData = {
             ...this.state.formData, 
             [e.target.name]: e.target.value
