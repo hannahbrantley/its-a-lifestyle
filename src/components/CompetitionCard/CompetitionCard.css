@@ -1,0 +1,4 @@
+th, td {
+    table-layout: fixed;
+    width: 200px;
+  }

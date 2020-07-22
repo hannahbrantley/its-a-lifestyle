@@ -1,7 +1,6 @@
 import React from 'react';
 
-function ParticipantStatusCard({participant, workouts, competition, getAllValidWorkoutsByParticipant, getValidWorkoutsPerWeek}) {
-  let validWorkouts = getAllValidWorkoutsByParticipant(participant, workouts, competition);
+function ParticipantStatusCard({participant, workouts, competition, getAllValidWorkoutsByParticipant}) {
   return (
     <tr>
       <td>{participant.name}</td>

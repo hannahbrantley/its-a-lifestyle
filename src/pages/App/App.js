@@ -144,9 +144,10 @@ class App extends Component {
             :
             <Redirect to='/login' />
           }/>
-          <Route exact path='/details' render={({location}) => 
+          <Route exact path='/details' render={({ location, history }) => 
             <CompetitionDetailPage 
             location={location}
+            history={history}
             participants={this.state.participants}
             workouts={this.state.workouts}
             />
