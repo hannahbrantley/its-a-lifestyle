@@ -95,6 +95,7 @@ class App extends Component {
       workouts
     }, () => this.props.history.push('/'));
   }
+
   /*--- Lifecycle Methods ---*/
   async componentDidMount() {
     this.getAllWorkouts();
