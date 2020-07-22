@@ -2,3 +2,8 @@
     display: flex;
     justify-content: space-around;
   }
+
+button {
+  margin-left: 10px;
+  margin-right: 10px;
+}

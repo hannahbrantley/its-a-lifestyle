@@ -1,10 +1,13 @@
 import React from 'react';
 import NavBar from '../../components/NavBar/NavBar';
-import TestComponent from '../../components/TestComponent/TestComponent'
-import WorkoutListItem from '../../components/WorkoutListItem/WorkoutListItem'
+import WorkoutListItem from '../../components/WorkoutListItem/WorkoutListItem';
 import './ProfilePage.css';
 
 const ProfilePage = (props) => {
+  let thisUsersWorkouts = props.workouts.filter(workout => 
+    workout.user === props.user._id
+   )
+
     return (
       <div className="ProfilePage">
         <NavBar
@@ -12,18 +15,17 @@ const ProfilePage = (props) => {
           handleLogout={props.handleLogout}
         />
         <div className="flex-h align-flex-end">
-          <TestComponent />
-        </div>
         <div>PROFILE</div>
         <div className='WorkoutListPage-grid'>
-            {props.workouts.map(workout => 
+            {thisUsersWorkouts.map(workout => 
               <WorkoutListItem
               user={props.user}
               workout={workout}
               handleDeleteWorkout={props.handleDeleteWorkout}
               key={workout._id}
               />
-            )}
+              )}
+        </div>
         </div>
       </div>
     );

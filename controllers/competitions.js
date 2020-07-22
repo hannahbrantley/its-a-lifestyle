@@ -16,13 +16,9 @@ module.exports = {
   async function create(req, res) {
     req.body.owner = req.user;
     const type = typeof(req.body.participants[0])
-    console.log(type);
+
 
     thisParticipant = await User.findById(req.body.participants[0]).exec()
-    console.log('thisParticipant:', thisParticipant);
-
-    console.log(typeof(req.body.owner))
-    console.log('participants: ', req.body.participants[1], type);
     const competition = await Competition.create(req.body);
     res.status(201).json(competition);
   }
