@@ -1,68 +1,38 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Day Planner
 
-## Available Scripts
+## Screenshots
+![Home page](https://imgur.com/fPo8ftb.png)
 
-In the project directory, you can run:
+![Add a Workout](https://i.imgur.com/mfAA1Mi.png)
 
-### `npm start`
+![Competition Details](https://imgur.com/Vf7j32D.png)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Profile](https://i.imgur.com/0ZpVBhU.png)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Technologies Used
+- React
+- NodeJS
+- ExpressJS
+- Mongoose
+- MongoDB
+- EJS
+- MomentJS
 
-### `npm test`
+## Getting Started
+1. First, navigate to the [Lifestyle Application](https://its-a-lifestyle.herokuapp.com/) and log in. 
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. On the Home page, you will see your current competitions. 
 
-### `npm run build`
+3. Create a new competition and invite your friends! 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. You can edit a competition if you are a logged in participant, but you may only delete if you are the owner / organizer. 
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+4. To add a workout, click the Add Workout link. You can see all of your workouts on the Profile Page. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. To see you and your friends progress on the competition, click the details page. Here, you can see who has met the requirements week by week, and who is winning! 
 
-### `npm run eject`
+## Next Steps
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Improve UX / UI design
+- Include section to view the total winnings
+- Add requirement logic to allow for restricting valid activities and setting a minimum workout time
